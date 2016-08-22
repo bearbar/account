@@ -54,13 +54,12 @@
 
     <iron-ajax
     id="ajax"
-    auto
     content-type="application/json"
     handle-as="json"
     body='{"email":"[[email]]", "password":"[[password]]"}'
     on-response="handleResponse"
     debounce-duration="300"
-    method="post"></iron-ajax>
+    ></iron-ajax>
 
 
     <div class="container flex-center-justified flex-center-align">
@@ -90,6 +89,8 @@
       is: 'log-in',
       setajax: function () {
             console.log("entro")
+            this.$.ajax.auto;
+            this.$.ajax.method="post";
             this.$.ajax.generateRequest();
 
          },
