@@ -1,0 +1,7 @@
+{
+  "name": "personal-app",
+  "short_name": "personal-app",
+  "description": "a personal app to prove what i have learnt",
+  "start_url": "/",
+  "display": "standalone"
+}
