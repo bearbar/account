@@ -1,0 +1,104 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="log-in">
+  <template>
+    <style is="custom-style">
+      :host {
+        display: block;
+      }
+      .card{
+          box-shadow: 0 15px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+          width: 500px;
+          height: 350px;
+          background-color:white;
+          -moz-border-radius: 20px;
+          -webkit-border-radius: 20px;
+          position: relative;
+      }
+      .logo{
+           width: 100px;
+           position: relative;
+           left:200px;
+           top:20px;
+           align-content:center;
+
+      }
+      .inputs{
+          margin:30px;
+      }
+      .input{
+          --paper-input-container-focus-color:rgb(255,165,0);
+      }
+      .button{
+        background:rgb(255,165,0);
+        color:white;
+        position: relative;
+        left:350px;
+      }
+      .flex-center-justified {
+        @apply(--layout-horizontal);
+        @apply(--layout-center-justified);
+        }
+
+        .flex-center-align {
+            @apply(--layout-horizontal);
+            @apply(--layout-center);
+            height: 700px;
+           }
+
+    </style>
+
+    <iron-ajax
+    id="ajax"
+    auto
+    content-type="application/json"
+    handle-as="json"
+    body='{"email":"[[email]]", "password":"[[password]]"}'
+    on-response="handleResponse"
+    debounce-duration="300"
+    method="post"></iron-ajax>
+
+
+    <div class="container flex-center-justified flex-center-align">
+        <div class="card">
+          <img src="../images/images.png" class="logo"/>
+          <div class="inputs">
+            <paper-input-container class="input">
+              <label>User</label>
+              <input is="iron-input" bind-value = "{{email}}">
+            </paper-input-container>
+
+            <paper-input-container class="input"  id="email">
+              <label>Password</label>
+              <input is="iron-input" bind-value = "{{password}}" type="password">
+            </paper-input-container>
+
+          </div>
+          <paper-button toggles raised class="button" on-click="setajax">Login</paper-button>
+        </div>
+      </div>
+
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'log-in',
+      setajax: function () {
+            console.log("entro")
+            this.$.ajax.generateRequest();
+
+         },
+      hresponse: function(request) {
+              console.log(request.detail.response);
+              console.log(this.$.ajax.lastResponse);
+           }
+
+
+      });
+  </script>
+</dom-module>
